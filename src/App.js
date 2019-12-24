@@ -4,8 +4,8 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hello World</h1>
+    <div data-test="component-app">
+      <div data-test="click-counter">click count is</div>
     </div>
   );
 }
