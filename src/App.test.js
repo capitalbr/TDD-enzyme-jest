@@ -21,7 +21,9 @@ Enzyme.configure({ adapter: new EnzymeAdapter() });
 // A helper function to more easily add props and state to the component you're
 // shallow rendering.
 const setup = (props={}, state=null) => {
-  return shallow(<App {...props}/>);
+  const wrapper = shallow(<App {...props}/>);
+  if (state) wrapper.setState(state);
+  return wrapper;
 };
 
 // A semi-useful Dryer version of wrapper.find.  It allows you to not have to
@@ -55,4 +57,16 @@ test('renders increment button', () => {
   expect(button.length).toBe(1);
 });
 
+test("Counter starts at 0", () => {
+  const wrapper = setup();
+  const initialCounterState = wrapper.state().counter;
+  expect(initialCounterState).toBe(0);
+});
 
+test("Button click increments counter by 1", () => {
+  const initialState = { counter: 7 }
+  const wrapper = setup({}, initialState);
+  const button = wrapper.find("[data-test='increment-button']");
+  button.simulate('click');
+  expect(wrapper.find("[data-test='counter-display']").text()).toContain("8");
+});
