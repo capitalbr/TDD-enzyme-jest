@@ -5,7 +5,8 @@ import './App.css';
 function App() {
   return (
     <div data-test="component-app">
-      <div data-test="click-counter">click count is</div>
+      <h1 data-test="counter-display">click count is</h1>
+      <button data-test="increment-button">button</button>
     </div>
   );
 }

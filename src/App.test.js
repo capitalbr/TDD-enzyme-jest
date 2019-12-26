@@ -18,10 +18,14 @@ import App from './App';
 // version of React.
 Enzyme.configure({ adapter: new EnzymeAdapter() });
 
-const setup = (props={}, state) => {
+// A helper function to more easily add props and state to the component you're
+// shallow rendering.
+const setup = (props={}, state=null) => {
   return shallow(<App {...props}/>);
 };
 
+// A semi-useful Dryer version of wrapper.find.  It allows you to not have to
+// remember what you called your test attribute.
 const findByTestAttr = (wrapper, val) => {
   return wrapper.find(`[data-test="${val}"]`);
 };
@@ -38,10 +42,17 @@ test('renders without crashing', () => {
   expect(appComponent.length).toBe(1);
 });
 
-test('renders click counter', () => {
+test('renders counter display', () => {
   const wrapper = setup();
-  const clickCounter = findByTestAttr(wrapper, "click-counter");
-  expect(clickCounter.length).toBe(1);
+  const counterDisplay = findByTestAttr(wrapper, "counter-display");
+  // assertions return an object of functions such as toBe
+  expect(counterDisplay.length).toBe(1);
+});
+
+test('renders increment button', () => {
+  const wrapper = shallow(<App/>);
+  const button = findByTestAttr(wrapper, "increment-button");
+  expect(button.length).toBe(1);
 });
 
 
