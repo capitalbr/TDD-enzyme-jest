@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import Counter from "./components/counter";
-import Jotto from "./components/jotto";
+import Jotto from "./components/jotto/jotto";
 
 class App extends React.Component{
   
