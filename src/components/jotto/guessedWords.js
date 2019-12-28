@@ -2,14 +2,45 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const GuessedWords = ({ guessedWords }) => {
-  let visibility = "";
-  if (guessedWords.length) visibility = "hidden";
-  return(
-    <div data-test="component-guessed-words">
-      <span data-test="guess-instructions"
-        className={visibility}> 
-        Please make a guess. 
+  let contents;
+  if (!guessedWords.length) {
+    contents = (
+      <span data-test="guess-instructions">
+        Please make a guess.
       </span>
+    )
+  } else {
+    contents = (
+      <>
+        <h3>Guessed Words</h3>
+        <table
+          data-test="guessed-words">
+          <thead>
+            <tr>
+              <th>Guess</th>
+              <th>Match Count</th>
+            </tr>
+          </thead>
+          <tbody>
+            {guessedWords.map((word, idx) => {
+              return <tr
+                data-test="guessed-word"
+                key={idx}>
+                <td>{word.guessedWord}</td>
+                <td>{word.letterMatchCount}</td>
+              </tr>
+            })}
+          </tbody>
+        </table>
+      </>
+    )
+  }
+
+  return(
+    <div 
+      data-test="component-guessed-words"
+      className="guessed-words">
+      {contents}
     </div>
   )
 };

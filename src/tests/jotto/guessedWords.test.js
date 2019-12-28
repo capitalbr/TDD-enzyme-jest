@@ -30,11 +30,48 @@ describe("if there are no words guessed", () => {
 
   test("renders instructions if there are no words guessed", () => {
     const instructions = findByTestAttr(wrapper, "guess-instructions");
-    const hasHiddenClass = instructions.hasClass("hidden");
-    expect(hasHiddenClass).toBe(false);
+    expect(instructions.length).toBe(1);
+    expect(instructions.text()).not.toBe("");
+  });
+
+  test("does not render guessed words section if there are no words guessed", () => {
+    const guessedWordsNode = findByTestAttr(wrapper, "guessed-words");
+    expect(guessedWordsNode.length).toBe(0);
   });
 });
 
 describe("if there are words guessed", () => {
+  const guessedWords = [
+      { guessedWord: "train", letterMatchCount: 3 },
+      { guessedWord: "agile", letterMatchCount: 1 },
+      { guessedWord: "party", letterMatchCount: 5 },
+    ]
+  
+  let wrapper;
+  beforeEach(() => {
+    wrapper = setup({ guessedWords });
+  });
 
+  test("renders without error", () => {
+    const component = findByTestAttr(wrapper, "component-guessed-words");
+    expect(component.length).toBe(1);
+  });
+
+  // don't test implementation meaning don't say "renders guessed words table"
+  // it doesn't have to be a table
+  // Also say 'Node' and not a specific element like "Div"
+  test("renders guessed words section", () => {
+    const guessedWordsNode = findByTestAttr(wrapper, "guessed-words");
+    expect(guessedWordsNode.length).toBe(1);
+  });
+
+  test("correct number of guessed words", () => {
+    const guessedWordsNodes = findByTestAttr(wrapper, "guessed-word");
+    expect(guessedWordsNodes.length).toBe(guessedWords.length);
+  });
+
+  test("doesn't render instructions if there are words guessed", () => {
+    const instructions = findByTestAttr(wrapper, "guess-instructions");
+    expect(instructions.length).toBe(0);
+  });
 });
