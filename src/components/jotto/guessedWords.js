@@ -14,8 +14,9 @@ const GuessedWords = ({ guessedWords }) => {
       <>
         <h3>Guessed Words</h3>
         <table
-          data-test="guessed-words">
-          <thead>
+          data-test="guessed-words"
+          className="table table-sm">
+          <thead className="thead-light">
             <tr>
               <th>Guess</th>
               <th>Match Count</th>
