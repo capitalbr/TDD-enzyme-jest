@@ -8,9 +8,6 @@ const setup = (preloadedState={}) => {
   return shallow(<Input store={store}/>).dive().dive();
 };
 
-setup(); 
-
-
 describe("render", () => {
   describe("When word has not been guessed", () => {
     test("renders without error", () => {
