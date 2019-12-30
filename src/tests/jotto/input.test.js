@@ -5,7 +5,7 @@ import Input from "../../components/jotto/input";
 
 const setup = (preloadedState={}) => {
   const store = storeFactory(preloadedState);
-  return shallow(<Input store={store}/>).dive().dive().debug();
+  return shallow(<Input store={store}/>).dive().dive();
 };
 
 setup(); 
