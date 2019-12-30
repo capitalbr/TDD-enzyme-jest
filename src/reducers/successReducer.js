@@ -1,4 +1,4 @@
-import { CORRECT_GUESS } from "../actions/guessedWordsActions";
+import { CORRECT_GUESS } from "../actions/actions";
 
 const successReducer = (oldState = false, action) => {
   switch(action.type){

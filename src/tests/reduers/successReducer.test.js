@@ -1,4 +1,4 @@
-import { CORRECT_GUESS } from "../../actions/guessedWordsActions";
+import { CORRECT_GUESS } from "../../actions/actions";
 import successReducer from "../../reducers/successReducer";
 
 test("Initially returns default state of 'false' when no action is passed", () => {
