@@ -2,10 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import "./styles/output.css";
 import Root from './Root';
+import configureStore from "./store";
 import * as serviceWorker from './serviceWorker';
 
 document.addEventListener("DOMContentLoaded", () => {
-  ReactDOM.render(<Root />, document.getElementById('root'));
+
+ReactDOM.render(<Root store={configureStore()}/>, document.getElementById('root'));
 });
 
 // If you want your app to work offline and load faster, you can change
