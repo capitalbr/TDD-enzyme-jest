@@ -17,7 +17,7 @@ const correctGuess = () => (
 
 const guessedWord = (guessedWord, letterMatchCount) => ({
   type: GUESSED_WORD,
-  value: { guessedWord, letterMatchCount}
+  payload: { guessedWord, letterMatchCount}
 });
 
 export const addGuessedWord = (word) => (dispatch, getState) => {

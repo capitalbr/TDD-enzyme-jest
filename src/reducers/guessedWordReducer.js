@@ -4,7 +4,7 @@ export default (oldState=[], action) => {
   Object.freeze(oldState);
   switch(action.type){
     case GUESSED_WORD:
-      return oldState.concat([action.value]);
+      return oldState.concat([action.payload]);
     default:
       return oldState
   }
