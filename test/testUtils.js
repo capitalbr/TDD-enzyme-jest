@@ -2,10 +2,9 @@ import checkPropTypes from "check-prop-types";
 import rootReducer from "../src/reducers/rootReducer";
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import logger from "redux-logger";
 
 export const storeFactory = (preloadedState) => (
-  createStore(rootReducer, preloadedState, applyMiddleware(thunk, logger))
+  createStore(rootReducer, preloadedState, applyMiddleware(thunk))
 );
 
 export const findByTestAttr = (wrapper, attribute) => (

@@ -21,9 +21,9 @@ const guessedWord = (guessedWord, letterMatchCount) => ({
 });
 
 export const addGuessedWord = (word) => (dispatch, getState) => {
-  if (getState.secretWord.toLowerCase() === word.toLowerCase()) {
+  if (getState().secretWord.toLowerCase() === word.toLowerCase()) {
     dispatch(correctGuess());
   }
-  let letterMatchCount = getLetterMatchCount(word, getState.secretWord);
+  let letterMatchCount = getLetterMatchCount(word, getState().secretWord);
   dispatch(guessedWord(word, letterMatchCount));
 };
