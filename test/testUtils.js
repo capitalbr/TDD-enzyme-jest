@@ -3,7 +3,7 @@ import rootReducer from "../src/reducers/rootReducer";
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 
-export const storeFactory = (preloadedState) => (
+export const storeFactory = (preloadedState = {}) => (
   createStore(rootReducer, preloadedState, applyMiddleware(thunk))
 );
 

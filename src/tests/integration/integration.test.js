@@ -1,5 +1,6 @@
-import { addGuessedWord } from "../../actions/actions";
+import { addGuessedWord, getSecretWord } from "../../actions/actions";
 import { storeFactory } from "../../../test/testUtils";
+import moxios from "moxios";
 
 describe("addGuessedWord action dispatcher", () => {
   const secretWord = "party";
@@ -71,5 +72,40 @@ describe("addGuessedWord action dispatcher", () => {
       } 
       expect(newState).toEqual(expectedState);
     });
+  });
+});
+
+describe("getSecretWord action dispatcher", () => {
+  let store;
+  let secretWord = "party";
+  beforeEach(() => {
+    moxios.install();
+    store = storeFactory();
+  });
+  afterEach(() => {
+    moxios.uninstall();
+  });
+  
+  test("add secretWord in axios response to state", () => {
+    moxios.wait(() => {
+      const request = moxios.requests.mostRecent();
+      request.respondWith({
+        status: 200,
+        response: secretWord
+      })
+    });
+    return store.dispatch(getSecretWord())
+      .then(() => {
+        const newState = store.getState();
+        expect(newState.secretWord).toBe(secretWord);
+        // could be more thorough and check that the entire state is correct
+        // const expectedState = {
+        //   secretWord,
+        //   success: false,
+        //   guessedWords: []
+        // }
+        // expect(newState).toEqual(expectedState);
+      });
+   
   });
 });
