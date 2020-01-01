@@ -18,4 +18,7 @@ import EnzymeAdapter from 'enzyme-adapter-react-16';
 // Alters the imported copy of Enzyme's configure value to include the code from
 // the above loaded adapter.  Now enzyme is speaking the correct language for your
 // version of React.
-Enzyme.configure({ adapter: new EnzymeAdapter() });
+Enzyme.configure({ 
+  adapter: new EnzymeAdapter(),
+  disableLifecycleMethods: true
+});

@@ -1,7 +1,7 @@
 import React from "react";
 import { storeFactory } from "../../../test/testUtils";
 import { shallow } from "enzyme";
-import Jotto from "../../components/jotto/jotto";
+import Jotto, { UnconnectedJotto } from "../../components/jotto/jotto";
 
 const setup = (initialState={}) => {
   const store = storeFactory(initialState);
@@ -38,4 +38,17 @@ describe("Redux props", () => {
     const getSecretWordProp = wrapper.instance().props.getSecretWord;
     expect(getSecretWordProp).toBeInstanceOf(Function);
   });
+});
+
+test("'getSecretWord' is called on Jotto mount", () => {
+  const getSecretWordMock = jest.fn();
+  const props = {
+    getSecretWord: getSecretWordMock,
+    success: false,
+    guessedWords: []
+  }
+  const wrapper = shallow(<UnconnectedJotto {...props}/>);
+  wrapper.instance().componentDidMount();
+  const getSecretWordCallCount = getSecretWordMock.mock.calls.length;
+  expect(getSecretWordCallCount).toBe(1);
 });

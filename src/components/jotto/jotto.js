@@ -5,7 +5,12 @@ import GuessedWords from "./guessedWords";
 import Input from "./input";
 import { getSecretWord } from "../../actions/actions";
 
-class Jotto extends Component {
+export class UnconnectedJotto extends Component {
+
+  componentDidMount(){
+    this.props.getSecretWord();
+  }
+
   render(){
     
     return(
@@ -27,4 +32,4 @@ const msp = ( { success, guessedWords, secretWord } ) => ({
   secretWord
 })
 
-export default connect(msp, { getSecretWord })(Jotto);
+export default connect(msp, { getSecretWord })(UnconnectedJotto);
