@@ -2,7 +2,22 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addGuessedWord } from "../../actions/actions";
 
-class Input extends Component{
+export class UnconnectedInput extends Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      guess: ""
+    }
+  }
+
+  handleChange(e){
+    this.setState({ guess: e.target.value});
+  };
+
+  handleClick(){
+    this.props.addGuessedWord("chicken");
+  };
+
   render(){
     const contents = this.props.success
       ? null
@@ -13,11 +28,13 @@ class Input extends Component{
             className="mb-2 mx-sm-3"
             type="text"
             placeholder="make a guess"
+            onChange={this.handleChange.bind(this)}
           />
           <button
             data-test="submit-button"
             className="btn btn-primary mb-2"
-            type="submit">
+            type="submit"
+            onClick={this.handleClick.bind(this)}>
             Submit
           </button>
         </form>
@@ -39,4 +56,4 @@ const mapStateToProps = ({ success }) => {
 //   { addGuessedWord: (word) => dispatch(addGuessedWord(word)) }
 // )
 
-export default connect(mapStateToProps, { addGuessedWord })(Input);
+export default connect(mapStateToProps, { addGuessedWord })(UnconnectedInput);

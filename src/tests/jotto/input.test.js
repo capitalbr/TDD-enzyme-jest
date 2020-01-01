@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { findByTestAttr, storeFactory } from "../../../test/testUtils";
-import Input from "../../components/jotto/input";
+import Input, { UnconnectedInput } from "../../components/jotto/input";
 
 const setup = (preloadedState={}) => {
   const store = storeFactory(preloadedState);
@@ -68,6 +68,25 @@ describe("redux props", () => {
     expect(addGuessedWordProp).toBeInstanceOf(Function);
   });
 
+});
+
+describe("addGuessedWord action creator call", () => {
+ 
+  beforeEach(() => {
+   
+  });
+  test("calls addGuessedWord onClick of submit button", () => {
+    const addGuessedWordMock = jest.fn();
+    const wrapper = shallow(<UnconnectedInput addGuessedWord={addGuessedWordMock}/>)
+    const submitButton = findByTestAttr(wrapper, "submit-button");
+    submitButton.simulate("click");
+    let addGuessedWordCallCount = addGuessedWordMock.mock.calls.length;
+    expect(addGuessedWordCallCount).toBe(1);
+  });
+  
+  test("calls addGuessedWord with correct argument", () => {
+    
+  });
 });
 
 
