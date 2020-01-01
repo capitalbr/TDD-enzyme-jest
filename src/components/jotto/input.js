@@ -6,16 +6,24 @@ export class UnconnectedInput extends Component{
   constructor(props){
     super(props);
     this.state = {
-      guess: ""
+      currentGuess: null
     }
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange(e){
-    this.setState({ guess: e.target.value});
+    e.preventDefault()
+    this.setState({ currentGuess: e.target.value});
   };
 
-  handleClick(){
-    this.props.addGuessedWord("chicken");
+  handleClick(e){
+    e.preventDefault()
+    const guessWord = this.state.currentGuess;
+    if (guessWord && guessWord.length) {
+      this.props.addGuessedWord(guessWord);
+    }
   };
 
   render(){
@@ -28,13 +36,14 @@ export class UnconnectedInput extends Component{
             className="mb-2 mx-sm-3"
             type="text"
             placeholder="make a guess"
-            onChange={this.handleChange.bind(this)}
+            value={this.state.currentGuess}
+            onChange={this.handleChange}
           />
           <button
             data-test="submit-button"
             className="btn btn-primary mb-2"
             type="submit"
-            onClick={this.handleClick.bind(this)}>
+            onClick={this.handleClick}>
             Submit
           </button>
         </form>
