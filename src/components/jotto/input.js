@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { addGuessedWord } from "../../actions/actions";
 
 class Input extends Component{
   render(){
@@ -33,4 +34,9 @@ const mapStateToProps = ({ success }) => {
   return { success }
 };
 
-export default connect(mapStateToProps)(Input);
+// don't need a controlled dispatch so this is unnecessary
+// const mapDispatchToProps = ( dispatch ) => (
+//   { addGuessedWord: (word) => dispatch(addGuessedWord(word)) }
+// )
+
+export default connect(mapStateToProps, { addGuessedWord })(Input);

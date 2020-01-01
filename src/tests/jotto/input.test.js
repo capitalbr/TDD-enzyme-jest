@@ -53,20 +53,29 @@ describe("render", () => {
   });
 });
 
-describe("update the state", () => {
+
+describe("redux props", () => {
+  test("receives 'success' piece of state as prop", () => {
+    const success = true;
+    const wrapper = setup({ success });
+    let successProp = wrapper.instance().props.success;
+    expect(successProp).toBe(success);
+  });
+
+  test("receives 'addGuessedWord' action creator as function prop", () => {
+    const wrapper = setup();
+    const addGuessedWordProp = wrapper.instance().props.addGuessedWord;
+    expect(addGuessedWordProp).toBeInstanceOf(Function);
+  });
 
 });
 
-test("Has access to succes part of state in props", () => {
 
-});
 
-test("Has correctGuess action creator as prop", () => {
 
-});
 
-test("Has addGuess action creator as prop", () => {
 
-});
+
+
 
 
