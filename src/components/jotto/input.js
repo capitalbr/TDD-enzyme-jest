@@ -6,7 +6,7 @@ export class UnconnectedInput extends Component{
   constructor(props){
     super(props);
     this.state = {
-      currentGuess: null
+      currentGuess: ""
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -23,6 +23,7 @@ export class UnconnectedInput extends Component{
     const guessWord = this.state.currentGuess;
     if (guessWord && guessWord.length) {
       this.props.addGuessedWord(guessWord);
+      this.setState({ currentGuess: "" });
     }
   };
 

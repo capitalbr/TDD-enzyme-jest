@@ -72,10 +72,11 @@ describe("redux props", () => {
 
 describe("addGuessedWord action creator call", () => {
   let addGuessedWordMock;
+  let wrapper;
   const currentGuess = "train"
   beforeEach(() => {
     addGuessedWordMock = jest.fn();
-    const wrapper = shallow(<UnconnectedInput addGuessedWord={addGuessedWordMock}/>);
+    wrapper = shallow(<UnconnectedInput addGuessedWord={addGuessedWordMock}/>);
     wrapper.setState({ currentGuess });
     const submitButton = findByTestAttr(wrapper, "submit-button");
     submitButton.simulate("click", { preventDefault(){} });
@@ -88,6 +89,11 @@ describe("addGuessedWord action creator call", () => {
   test("calls addGuessedWord with correct argument", () => {
     let addGuessedWordArg = addGuessedWordMock.mock.calls[0][0];
     expect(addGuessedWordArg).toBe(currentGuess);
+  });
+
+  test("Input box clears upon submit", () => {
+    // wrapper.state().currentGuess or wrapper.state("currentGuess")
+    expect(wrapper.state("currentGuess")).toBe("");
   });
 });
 

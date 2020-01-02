@@ -1,5 +1,5 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 import { findByTestAttr, checkProps } from "../../../test/testUtils";
 import GuessedWords from "../../components/jotto/guessedWords";
 
@@ -73,5 +73,26 @@ describe("if there are words guessed", () => {
   test("doesn't render instructions if there are words guessed", () => {
     const instructions = findByTestAttr(wrapper, "guess-instructions");
     expect(instructions.length).toBe(0);
+  });
+
+  test("displays correct guessed word count", () => {
+    const guessedWordNumber = findByTestAttr(wrapper, 'guessed-word-number').getElements();
+    expect(guessedWordNumber[0].props.children).toBe(1);
+    expect(guessedWordNumber[1].props.children).toBe(2);
+    expect(guessedWordNumber[2].props.children).toBe(3);
+  });
+
+  test("displays correct guessed word", () => {
+    const word = findByTestAttr(wrapper, 'word').getElements();;
+    expect(word[0].props.children).toBe("train");
+    expect(word[1].props.children).toBe("agile");
+    expect(word[2].props.children).toBe("party");
+  });
+
+  test("displays correct guessed word letter match count", () => {
+    const letterMatchCount = findByTestAttr(wrapper, 'letter-match-count').getElements();
+    expect(letterMatchCount[0].props.children).toBe(3);
+    expect(letterMatchCount[1].props.children).toBe(1);
+    expect(letterMatchCount[2].props.children).toBe(5);
   });
 });
